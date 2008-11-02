@@ -16,7 +16,7 @@ use Tie::Hash;
 
 use base qw(Tie::StdHash);
 
-$VERSION = '0.09';
+$VERSION = '0.09.1';
 
 sub TIEHASH
 {

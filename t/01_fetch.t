@@ -1,9 +1,6 @@
-use Test::More tests => 4;
+use Test::More tests => 3;
 
 BEGIN { use_ok('Tie::Array::AsHash') };
-
-# make sure the test file exists
-ok(-e "t/testfile", "testfile that is used by the various tests");
 
 my %hash;
 my @array = qw(first:line foo:bar one:uno two:dos bar:baz last:line);
