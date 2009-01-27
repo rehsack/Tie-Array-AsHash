@@ -1,10 +1,20 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Tie-Array-AsHash
-version:      0.010
-version_from: lib/Tie/Array/AsHash.pm
-installdirs:  site
+--- #YAML:1.0
+name:               Tie-Array-AsHash
+version:            0.011
+abstract:           Like Tie::File::AsHash (now: groundwork for it) but
+author:
+    - Chris Angell <chris@chrisangell.com>, Jens Rehsack <rehsack@web.de>
+license:            perl
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
 requires:
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.17
+    Params::Util:  0.35
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.48
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4

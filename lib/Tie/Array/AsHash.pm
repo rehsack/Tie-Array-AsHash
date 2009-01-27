@@ -13,10 +13,11 @@ use vars qw($VERSION);
 use Carp;
 
 use Tie::Hash;
+use Params::Util qw(_REGEX _STRING);
 
 use base qw(Tie::StdHash);
 
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 sub TIEHASH
 {
@@ -36,7 +37,7 @@ sub TIEHASH
     # if split's value is a regex and join isn't specified, croak
     croak( "Tie::Array::AsHash error: no 'join' option specified and 'split' option is a regular expression\n",
            usage() )
-      if ( ref($split) eq 'Regexp' and not defined($join) );
+      if ( _REGEX($split) and not _STRING($join) );
 
     # the rest of the options can feed right into Tie::File
     # Tie::File can worry about checking the arguments for validity, etc.
@@ -44,9 +45,10 @@ sub TIEHASH
 
     my $self = bless(
                       {
-                         split => $split,
-                         join  => $join,
-                         array => $array,
+                         split   => $split,
+                         join    => $join,
+                         array   => $array,
+			 splitrx => qr/^(.*?)$split/s,
                       },
                       $obj
                     );
@@ -136,13 +138,12 @@ sub FIRSTKEY
     # deal with empty files
     return unless ( exists( $self->{array}->[0] ) );
 
-    my $keyrx = qr/^(.*?)$self->{split}/s;
-    my ($val) = $self->{array}->[0] =~ $keyrx;
+    my ($val) = $self->{array}->[0] =~ $self->{splitrx};
 
     # reset index for NEXTKEY
     $self->{index} = 0;
 
-    return $val;
+    return defined($val) ? $val : $self->NEXTKEY();
 }
 
 sub NEXTKEY
@@ -151,10 +152,14 @@ sub NEXTKEY
 
     # keep track of what line of the file we are on
     # and the end of the file
-    return if ( ++$self->{index} >= scalar( @{ $self->{array} } ) );
+    return if ( $self->{index} >= scalar( @{ $self->{array} } ) );
 
-    my $keyrx = qr/^(.*?)$self->{split}/s;
-    my ($val) = $self->{array}->[ $self->{index} ] =~ $keyrx;
+    my $val;
+    while( !defined( $val ) )
+    {
+        last if ( ++$self->{index} >= scalar( @{ $self->{array} } ) );
+        ($val) = $self->{array}->[ $self->{index} ] =~ $self->{splitrx};
+    }
 
     return $val;
 }
@@ -325,6 +330,25 @@ Say you want to be sure no ':' delimiters exist in the file:
  {
  	$hash{$key} = $val;
  }
+
+=head1 TODO
+
+=over 4
+
+=item *
+
+add supoort for comments and/or commented lines
+
+=over 8
+
+=item + RfC
+
+new parameters: C<S<comment =E<gt> regex, comment_join =E<gt> ' #'>>
+similar to split/join parameters?
+
+=back
+
+=back
 
 =head1 AUTHOR
 

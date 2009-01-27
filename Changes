@@ -37,4 +37,11 @@ Revision history for Perl module Tie::Array::AsHash
 	- Broken test cases fixed. Test failed on older versions of Perl (< 5.8.3) and Windows
 
 0.09  Wed May 14 18:10:00 2008
-    - Functionality to work on array splitted from Tie::File::AsHash
+	- Functionality to work on array splitted from Tie::File::AsHash
+
+0.10  Sat Nov  8 12:56:00 MEZ 2008
+	- Fix tests to work on arrays - not on files
+
+0.11  Tue Jan 27 09:10:48 MEZ 2009
+	- ignore lines without key/value pairs
+	- create regex for each() iteration once during contruction
