@@ -17,7 +17,7 @@ use Params::Util qw(_REGEX _STRING);
 
 use base qw(Tie::StdHash);
 
-$VERSION = '0.11';
+$VERSION = '0.200';
 
 sub TIEHASH
 {
