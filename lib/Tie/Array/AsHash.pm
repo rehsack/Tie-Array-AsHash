@@ -7,6 +7,7 @@
 package Tie::Array::AsHash;
 
 use strict;
+use warnings;
 
 # use warnings;
 use vars qw($VERSION);
@@ -19,24 +20,27 @@ use base qw(Tie::StdHash);
 
 $VERSION = '0.200';
 
+my $usage = 'usage: tie %hash, \'Tie::Array::AsHash\', array => \@array, '
+      . "split => ':' [, join => '#', 'Tie::File option' => value, ... ]\n";
+
 sub TIEHASH
 {
-    croak( usage() ) unless ( scalar(@_) % 2 );
+    croak( $usage ) unless ( scalar(@_) % 2 );
 
     my ( $obj, %opts ) = @_;
 
     # set array to use
-    my $array = delete( $opts{array} ) or croak( usage() );
+    my $array = delete( $opts{array} ) or croak( $usage );
 
     # set delimiter and croak if none was supplied
-    my $split = delete( $opts{split} ) or croak( usage() );
+    my $split = delete( $opts{split} ) or croak( $usage );
 
     # set join, an optional argument
     my $join = delete( $opts{join} );
 
     # if split's value is a regex and join isn't specified, croak
     croak( "Tie::Array::AsHash error: no 'join' option specified and 'split' option is a regular expression\n",
-           usage() )
+           $usage )
       if ( _REGEX($split) and not _STRING($join) );
 
     # the rest of the options can feed right into Tie::File
@@ -182,12 +186,6 @@ sub UNTIE
 sub DESTROY
 {
     UNTIE(@_);
-}
-
-sub usage
-{
-    return 'usage: tie %hash, \'Tie::Array::AsHash\', array => \@array, '
-      . "split => ':' [, join => '#', 'Tie::File option' => value, ... ]\n";
 }
 
 =head1 NAME
