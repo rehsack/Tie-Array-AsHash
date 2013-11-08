@@ -1,9 +1,3 @@
-#
-# Tie::Array::AsHash
-#
-# $Id$
-#
-
 package Tie::Array::AsHash;
 
 use strict;
