@@ -190,8 +190,7 @@ sub DESTROY
 
 =head1 NAME
 
-Tie::Array::AsHash - Like Tie::File::AsHash (now: groundwork for it) but
-allows any array being source, not just files.
+Tie::Array::AsHash - tie arrays as hashes by splitting lines on separator
 
 =head1 SYNOPSIS
 
