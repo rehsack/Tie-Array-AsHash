@@ -1,47 +1,21 @@
 Revision history for Perl module Tie::Array::AsHash
 
-0.01  Mon Jan  3 11:42:11 2005
-	- Original version, never released
+0.200	2013-11-05
+    - update toolchain
+    - reformat changes as per CPAN::Changes::Spec
+    - move repository to GitHub
+    - tidy tests and loader part
+    - find better abstract
 
-0.02  Tue Jan  4 10:05:43 2005
-	- Code cleaned up, numerous modifications
-	- Made some basic tests
-	- Initial release on CPAN
+0.11	2009-01-27
+    - ignore lines without key/value pairs
+    - create regex for each() iteration once during contruction
 
-0.03  Tue Jan  4 16:26:16 2005
-	- No more global (lexical to file) variables - uses
-	  $self for parameters
-	- Renamed parameters (split and join)
-	- Used \Q and \E in regexes where needed
-	- Regexes use the s modifier now, to allow for
-	  newlines in strings
-	- Other minor changes to documentation and code
-	- Module is still beta
+0.10	2008-11-08
+    - Bump version to 0.10 - 0.09.1 < 0.09
 
-0.04  Wed Feb  2 15:33:40 2005
-	- NEXTKEY wasn't incrementing the index
+0.09.1	2008-11-08
+    - Fix tests to work on arrays - not on files
 
-0.05  Wed Feb  2 16:40:20 2005
-	- Rather major typo in the module's POD
-	- More tests
-
-0.06  Wed Feb  2 22:10:23 2005
-	- Added META.yml to package
-	- More tests
-	
-0.07  Thu Oct 27 09:58:32 2005
-	- Fixed small problem in sub STORE.  Thanks
-	  Marco Poleggi for the patch!
-
-0.08  Mon Nov 21 19:41:00 2005
-	- Broken test cases fixed. Test failed on older versions of Perl (< 5.8.3) and Windows
-
-0.09  Wed May 14 18:10:00 2008
-	- Functionality to work on array splitted from Tie::File::AsHash
-
-0.10  Sat Nov  8 12:56:00 MEZ 2008
-	- Fix tests to work on arrays - not on files
-
-0.11  Tue Jan 27 09:10:48 MEZ 2009
-	- ignore lines without key/value pairs
-	- create regex for each() iteration once during contruction
+0.09	2008-05-14
+    - Functionality to work on array splitted from Tie::File::AsHash
