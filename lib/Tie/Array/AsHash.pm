@@ -11,7 +11,7 @@ use Params::Util qw(_REGEX _STRING);
 
 use base qw(Tie::StdHash);
 
-our $VERSION = '0.200';
+our $VERSION = '0.201';
 
 my $usage = 'usage: tie %hash, \'Tie::Array::AsHash\', array => \@array, '
       . "split => ':' [, join => '#', 'Tie::File option' => value, ... ]\n";
