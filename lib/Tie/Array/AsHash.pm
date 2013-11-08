@@ -10,15 +10,14 @@ use strict;
 use warnings;
 
 # use warnings;
-use vars qw($VERSION);
-use Carp;
+use Carp qw/croak/;
 
-use Tie::Hash;
+use Tie::Hash ();
 use Params::Util qw(_REGEX _STRING);
 
 use base qw(Tie::StdHash);
 
-$VERSION = '0.200';
+our $VERSION = '0.200';
 
 my $usage = 'usage: tie %hash, \'Tie::Array::AsHash\', array => \@array, '
       . "split => ':' [, join => '#', 'Tie::File option' => value, ... ]\n";
